@@ -7,7 +7,7 @@ load_dotenv()
 
 key = os.getenv("OPENAI_API_KEY")
 # Title of the Streamlit app
-st.title("Orenda Form Intake Assistance")
+st.title("Orenda Form Intake Assistant")
 
 # Initialize the OpenAI client
 client = OpenAI(api_key=key)
@@ -18,7 +18,7 @@ if "openai_model" not in st.session_state:
 
 # Initialize messages, progress tracking, and response storage
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Welcome to the Orenda Intake System! Let's get started with some questions to complete your intake form."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Welcome to Orenda Psychiatry! I'll help you complete your forms. Let's get started, what's your first name?"}]
 
 if "intake_complete" not in st.session_state:
     st.session_state.intake_complete = False
@@ -36,14 +36,13 @@ intake_context = """
 - You are an interactive assistant helping with a patient intake form.
 - Respond interactively, keeping the conversation friendly and professional.
 - Confirm when all questions have been answered. And Thank the patient including their first name for completing the intake form and that their responses have been recorded that A member of our team will reach out to you as soon as possible for the next step.
-- Validate all the patients response to match the require question lets date match date, email to match email and so on.
-- Please ask the following questions one by one:
-What is your first name?
-And your last name?
+- Validate all the patients response to match the required question, e.g., date should match date format, email should match email format, etc.
+- Note when the chatbot is launched it has already asked the patient's first name, so ensure you continue with patient last name and go through the entire question we have below one by one:
+What is your last name?
 How did you hear about us?
 What is your date of birth? Please use the format MM/DD/YYYY.
-Is this appointment for a minor child? 
-What is your sex assigned at birth? 
+Is this appointment for a minor child?
+What is your sex assigned at birth?
 Please enter your street address.
 What city do you live in?
 What state?
@@ -93,4 +92,4 @@ if prompt := st.chat_input("Your response here:"):
         with st.chat_message("assistant"):
             st.markdown(assistant_reply)
     else:
-        st.warning("The intake process is already complete.") 
+        st.warning("The intake process is already complete.")
