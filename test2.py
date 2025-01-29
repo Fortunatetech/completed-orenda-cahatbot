@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 key = os.getenv("OPENAI_API_KEY")
+
 # Title of the Streamlit app
 st.title("Orenda Form Intake Assistant")
 
@@ -85,7 +86,7 @@ if prompt := st.chat_input("Your response here:"):
         if "Your intake is now complete" in assistant_reply:
             st.session_state.intake_complete = True
             save_responses_to_file(st.session_state.responses)  # Save responses after completion
-            st.success("Your responses have been saved successfully.")
+            st.success("Your responses have been saved successfully..")
 
         # Append assistant response to messages
         st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
